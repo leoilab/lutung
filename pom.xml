@@ -4,7 +4,7 @@
 
     <groupId>com.mandrillapp.wrapper.lutung</groupId>
     <artifactId>lutung</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>0.0.8-fork-SNAPSHOT</version>
     <name>lutung</name>
     <description>Mandrill API Client for Java</description>
     <url>https://github.com/rschreijer/lutung</url>
@@ -47,6 +47,13 @@
     </scm>
 
     <build>
+      <extensions>
+        <extension>
+          <groupId>org.kuali.maven.wagons</groupId>
+          <artifactId>maven-s3-wagon</artifactId>
+          <version>1.1.22</version>
+        </extension>
+      </extensions>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -128,17 +135,16 @@
     </profiles>
 
     <distributionManagement>
-        <!-- Sonatype repo info -->
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus snapshot repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Sonatype Nexus release repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>leoilab-platform-maven-s3-release-repo</id>
+            <name>AWS Release Repository</name>
+            <url>s3://leo-platform-packages/releases</url>
         </repository>
+        <snapshotRepository>
+            <id>leoilab-platform-maven-s3-snapshot-repo</id>
+            <name>AWS Snapshot Repository</name>
+            <url>s3://leo-platform-packages/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <dependencies>

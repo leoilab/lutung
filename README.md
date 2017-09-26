@@ -1,3 +1,45 @@
+Fork!
+=====
+
+This is a fork with no intention to push back to the original project. 
+
+Motivation: Make the Mandrill SDK url configurable. The original explains why they don't want this approach:
+
+https://github.com/rschreijer/lutung/pull/39
+
+Note: The suggested approach with java io proxy did not work for the InTouch project.
+
+To deploy the project to the platform s3 maven repos for now do some work by hand:
+
+Add a `~/.m2/settings.xml` file with at least:
+
+```
+<server>
+  <id>leoilab-platform-maven-s3-release-repo</id>
+  <username>insert aws_access_key_id likely from ~/.aws/credentials or AWS AIM</username>
+  <password>insert aws_secret_access_key likely from ~/.aws/credentials or AWS AIM</password>
+</server>
+<server>
+  <id>leoilab-platform-maven-s3-snapshot-repo</id>
+  <username>insert aws_access_key_id likely from ~/.aws/credentials or AWS AIM</username>
+  <password>insert aws_secret_access_key likely from ~/.aws/credentials or AWS AIM</password>
+</server>
+```
+
+Deploy it:
+
+```
+$ mvn clean deploy
+```
+
+Look up if it arrived:
+
+```
+$ aws s3 ls s3://leo-platform-packages/snapshots/com/mandrillapp --region eu-west-1 --recursive
+```
+
+Perfect we are done.
+
 Lutung - Java Mandrill API
 ======
 
